@@ -97,11 +97,22 @@
                 this.newitem = '';
             },
             toogleFinsih: function (item) {
-                console.log(localStorage.getItem(todoList));
                 item.isFinish = !item.isFinish;
+                toDoListData.add(this.items); //因為localStorage裡是已key by vlaue 儲存，所以可以透過add實作修改
 
-                //因為localStorage裡是已key by vlaue 儲存，所以可以透過add實作修改
-                toDoListData.add(this.items);
+                let isFinishCcount = 0;
+                for(var index in this.items){
+                    if(this.items[index].isFinish){
+                        isFinishCcount++;  
+                    }
+                }
+
+                let unfinishedCount = (this.items.length - isFinishCcount);
+                if(unfinishedCount == 0){
+                    alert("登登登!恭喜做完所有事情可以耍廢了");
+                }else{
+                    alert("還有"+ unfinishedCount + "事項要做，加油");
+                }
             },
             clearItem: function () {
                 this.items = [];
